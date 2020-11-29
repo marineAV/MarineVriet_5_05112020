@@ -1,0 +1,39 @@
+/*****************CSS Produit.html*************/
+.logoProduct{
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+/*****************CSS Panier.html*************/
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+.logo{
+    font-size: 30px;
+}
+h3{
+    margin-bottom: 0;
+    padding-top: 8px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#articles{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.sm{
+    font-size: 14px;
+}
+
+@media screen and (max-width: 768px){
+    #articles{
+        display: flex;
+        flex-direction: column!important;
+        text-align: center;
+    }
+    .spaceResponsive{
+        margin-top: 15px;
+    }
+}
