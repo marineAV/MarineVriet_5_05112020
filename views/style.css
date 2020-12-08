@@ -26,7 +26,16 @@ h3{
 .sm{
     font-size: 14px;
 }
-
+.empty{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+.quantityCart{
+    text-align: center;
+}
 @media screen and (max-width: 768px){
     #articles{
         display: flex;
@@ -35,5 +44,11 @@ h3{
     }
     .spaceResponsive{
         margin-top: 15px;
+    }
+}
+@media screen and (max-width: 600px){
+    .titlesCard, .eachArticle{
+        display: flex;
+        flex-direction: column;
     }
 }

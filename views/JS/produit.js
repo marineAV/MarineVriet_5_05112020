@@ -6,9 +6,21 @@ const camId = params.get("id")
 const myNewUrl = url + "/" + camId;
 console.log(myNewUrl);
 
+//Création de l'objet panier**************************************************************
+if(localStorage.getItem("myCart")){    //le panier existe déjà dans le localStorage
+  console.log("Le panier existe bien!")
+}else{    // Le panier n'existe pas, il va être envoyé dans le localStorage
+  console.log("Création du panier")
+  let initCart = [];
+  localStorage.setItem("myCart", (JSON.stringify(initCart)))
+}
+
+let cart = JSON.parse(localStorage.getItem("myCart"))
+
+// fetch de l'API et insertion de chaque élément du produit************************************
+
 const section = document.querySelector('#allDescription')
 
-// fetch de l'API et insertion de haque élément du produit
 fetch(myNewUrl)
  .then(response => response.json())
  .then(data => {
@@ -36,37 +48,31 @@ fetch(myNewUrl)
         dropdown.appendChild(lense);
         lense.innerHTML = element;
     });
-})
-.catch(error => console.log('ERROR'));
 
-// Évènement sur le bouton lentilles******************************************************
-const selectElem = document.querySelector('select');
 
-//  const chosenLensesValue = selectElem.addEventListener('change', function() {
-  // var index = selectElem.selectedIndex;
-  // var indexValue = selectElem.options[selectElem.selectedIndex].value;
-  // console.log('Lentilles choisies: '+ indexValue);
-  // console.log(index)
-// })
+  // Évènement sur le bouton lentilles ******************************************************
+    function chosenLenses(){
+      const selectElem = document.querySelector('select');
 
-// Validation de la quantité
-function generate(){
-    const chosenLensesValue = selectElem.addEventListener('change', function() {
-      var indexValue = selectElem.options[selectElem.selectedIndex].value;
+      selectElem.addEventListener('change', function() {  
+        // let index = selectElem.selectedIndex;
+        let indexValue = selectElem.options[selectElem.selectedIndex].value;
+        console.log('Lentilles choisies: '+ indexValue);
+        // console.log(index)
     })
-    if(chosenLensesValue >= 1){
-      const button = document.getElementById('basket-button').addEventListener('click', function(){
-        alert("Votre produit vient d'être ajouté à votre panier!");
-        });
-    }else{
-      const warn = document.createElement('p');
-      buttonForm.appendChild(warn);
-      warn.innerText = `Veuillez choisir la quantité!`;
+  }
+  chosenLenses();
+
+  // Envoi les données au clic du bouton panier********************************************
+    function addCart(){
+      let btnCart = document.getElementById("cart-button");
+      btnCart.addEventListener('click', function(){
+        cart.push(data);
+        localStorage.setItem("myCart", JSON.stringify(cart))
+        console.log(data);
+      })
     }
- };
-
-  const panier = document.getElementById('basket-button').addEventListener('click',function(){
-    console.log("BIM! C'est dans le panier!");
+    addCart();
   })
-
+.catch(error => console.log('ERROR'));
 
