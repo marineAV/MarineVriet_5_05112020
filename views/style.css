@@ -36,6 +36,14 @@ h3{
 .quantityCart{
     text-align: center;
 }
+.navbar-brand{
+    font-size: 35px;
+    font-family: cursive, sans-serif;
+}
+.dangerType{
+    font-size: 13px;
+    color : red;
+}
 @media screen and (max-width: 768px){
     #articles{
         display: flex;

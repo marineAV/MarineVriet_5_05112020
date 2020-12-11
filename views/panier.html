@@ -57,7 +57,7 @@
                 <h3 class="ml-4">VOTRE PANIER</h3>
             </div>
             <hr>
-            <a id="paymentButton" class="btn btn-info btn-block" href="form.html">COMMANDER</a>
+            <a id="paymentButton" class="btn btn-info btn-block" href="#inscription">COMMANDER</a>
         </div>
 
         <hr>
@@ -108,60 +108,70 @@
                         <h6>Livraison</h6>
                         <div class="row">
                             <select class="sm">
-                                <option class="text-muted">Livraison Standard - 5.00&euro;</option>
-                                <option class="text-muted">Mondial Relay - 2.50&euro;</option>
+                                <option class="text-muted">Choisissez...</option>
+                                <option class="text-muted" value="5">Livraison Standard : 5.00€</option>
+                                <option class="text-muted" value="2">Mondial Relay : 2.00€</option>
                             </select>
+                            <div id="deliveryPrice" class="col text-right">0</div>
+                            <div> €</div>
                         </div> 
                     </form>
 
                     <div class="row mt-3">
                         <h6 class="col">Prix total</h6>
-                        <div class="col text-right">137.00&euro;</div>
+                        <div class="col text-right totalProducts">0</div>
                     </div>
-                    <a class="btn btn-info mx-2 my-3" href="form.html">COMMANDER</a>
+                    <a class="btn btn-info mx-2 my-3" href="#inscription">COMMANDER</a>
 
                 </div>
             </div>
         </div>
 
         <!-- Formulaire -->
-        <form class="col-8 mt-5 ml-5">
+        <form id="inscription" class="col-8 mt-5 ml-5">
             <h2 class="mb-5">Formulaire de commande</h2>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Nom *</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nicholson">
+                    <input type="text" class="form-control" id="name" placeholder="Nicholson" required="required">
+                    <p class="dangerType nameClass"></p>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="firstName">Prénom *</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Jack">
+                    <input type="text" class="form-control" id="firstName" placeholder="Jack" required="required">
+                    <p class="dangerType firstNameClass"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="mailAddress">Adresse e-mail *</label>
-                <input type="email" class="form-control" id="mailAddress" placeholder="jacknicholson@gmail.com">
+                <input type="email" class="form-control" id="mailAddress" placeholder="jacknicholson@gmail.com" required="required">
+                <p class="dangerType mailClass"></p>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Téléphone</label>
-                <input type="number" class="form-control" id="phoneNumber" placeholder="0602...">
+                <input type="text" class="form-control" id="phoneNumber" placeholder="0602...">
             </div>
             <div class="form-group">
                 <label for="inputAddress">Adresse *</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="21 rue de la vallée...">
+                <input type="text" class="form-control" id="inputAddress" placeholder="21 rue de la vallée..." required="required">
+                <p class="dangerType addressClass"></p>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="postal">Code Postal *</label>
-                    <input type="text" class="form-control" id="postal" placeholder="75002">
+                    <input type="text" class="form-control" id="postal" placeholder="75002" required="required">
+                    <p class="dangerType postalClass"></p>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="city">Ville *</label>
-                    <input type="text" class="form-control" id="city" placeholder="Paris">
+                    <input type="text" class="form-control" id="city" placeholder="Paris" required="required">
+                    <p class="dangerType cityClass"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="country">Pays *</label>
                 <select id="country" class="form-control">
+                    <option>Choisissez un pays...</option>
                     <option>France</option>
                     <option>Afghanistan</option>
                     <option>Afrique</option>
@@ -170,7 +180,9 @@
                     <option>Allemagne</option>
                     <option>...</option>
                 </select>
+                <p class="dangerType countryClass"></p>
                 </div>
+                <button id="submit" class="btn btn-info mt-3">SOUMETTRE LE FORMULAIRE</button>
         </form>
 
         <!-- footer -->
