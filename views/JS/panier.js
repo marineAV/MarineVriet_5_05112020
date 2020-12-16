@@ -83,23 +83,24 @@ if(panier.length === 0){ // Si localStorage vide alors "Votre panier est vide"
 }
 // Total du panier hors livraison**********************************************************************
 const totalProduct = document.querySelector("#totalProducts");
-const totalWithDelivery = document.querySelector(".totalProducts");
 const priceOfAll = document.querySelectorAll(".titlePrice");
 let sum = 0
 JSON.parse(localStorage.getItem('myCart')).forEach((data) => {
     sum += data.price/100;
     console.log(sum);
     totalProduct.innerHTML = sum + ",00 €";
-    totalWithDelivery.innerHTML = sum + ",00 €";
 });
 
-// fonction pour afficher la livraison lors de sa sélection
+// fonction pour afficher la livraison lors de sa sélection et additionné la livraison au prix total des articles
 const delivery = document.getElementById('deliveryPrice');
 const selectDelivery = document.querySelector('select');
 const totalDelivery = document.getElementById('totalDelivery');
+const totalWithDelivery = document.querySelector(".totalProducts");
 
-    selectDelivery.addEventListener('change', function() {  
-    let valueOfChoice = selectDelivery.options[selectDelivery.selectedIndex].value;
+selectDelivery.addEventListener('change', function() {  
+    let valueOfChoice = selectDelivery.options[selectDelivery.selectedIndex].value;    
+    let deliveryIndex = selectDelivery.selectedIndex;
+    console.log(deliveryIndex);
     console.log('Livraison: '+ valueOfChoice);
         if(valueOfChoice === "5"){
             delivery.innerHTML = "5,00";
@@ -112,9 +113,10 @@ const totalDelivery = document.getElementById('totalDelivery');
             console.log(mondialRelayDelivery);
             totalWithDelivery.innerHTML = mondialRelayDelivery;
         }
-    })
+});
 
 // Check si le panier est vide***********************************************************
+// renvoi false si le panier (localStorage) est vide, true s'il comporte des articles
 function checkCart(){
     let panier = JSON.parse(localStorage.getItem('myCart'));
     if(panier.length === 0){
@@ -128,9 +130,8 @@ function checkCart(){
  checkCart();
 
 // Check les input du formulaire*********************************************************
+// et renvoie true s'ils sont bien rempli
 let submit = document.getElementById('submit');
-
-submit.addEventListener('click', checkForm) 
 
 function checkForm(){
 
@@ -184,31 +185,49 @@ function checkForm(){
     }else if(!valueIndex >= 1){
         let badCountry = document.querySelector('.countryClass')
         badCountry.innerHTML = "Veuillez choisir un pays";
-        console.log("ok!")
+        console.log("Les comptes sont pas bons Kévin!");
+    }else{
+        return true;
     }
 };
+submit.addEventListener('click', function(e){
+    e.preventDefault();
+    if(checkForm() == true && checkCart() == true){
+        console.log("Tout va bien!");
 
-// Récupère les valeurs de chaque input
-let contactForm = {
-    name : document.getElementById("name").value,
-    firstName : document.getElementById('firstName').value,
-    mailAddress : document.getElementById('mailAddress').value,
-    inputAddress : document.getElementById('inputAddress').value,
-    postal : document.getElementById('postal').value,
-    city : document.getElementById('city').value,
-    country : document.getElementById('country').value,
-};
+        // Récupère les valeurs de chaque input dans un objet
+        let contact = {
+            firstName : document.getElementById('firstName').value,            
+            lastName : document.getElementById("name").value,
+            address : document.getElementById('inputAddress').value,
+            city : document.getElementById('city').value,            
+            email : document.getElementById('mailAddress').value
+        };
+        console.log(contact);
+        // chaque produit dans le panier est envoyé dans le tableau productFromCart
+        let products = [];
+        JSON.parse(localStorage.getItem('myCart')).forEach((product)=>{
+            products.push(product._id);
+        });
+        console.log(products);
 
-// Envoi du formulaire
+        //Envoi du formulaire            
 
-// fetch("http://localhost:3000/api/cameras/order",{
-//     headers : {
-//         'Accept' : 'application/json',
-//         'Content-type' : 'application/json',   
-//     },
-//     method : "POST",
-//     body : JSON.stringify(contactForm)
-// })
-// .then(function(res){
-//     return res.json()
-// })
+        fetch("http://localhost:3000/api/cameras/order", {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'   
+            },
+            body : JSON.stringify(contact, products)
+        })
+        .then(res => res.json())
+        .then(res => localStorage.setItem('orderId', res.orderId))
+            console.log(res.orderId)
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+})
+ 
+
+
