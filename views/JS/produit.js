@@ -6,7 +6,7 @@ const camId = params.get("id")
 const myNewUrl = url + "/" + camId;
 console.log(myNewUrl);
 
-//Création de l'objet panier**************************************************************
+//Création de l'objet panier myCart**************************************************************
 if(localStorage.getItem("myCart")){    //le panier existe déjà dans le localStorage
   console.log("Le panier existe bien!")
 }else{    // Le panier n'existe pas, il va être envoyé dans le localStorage
