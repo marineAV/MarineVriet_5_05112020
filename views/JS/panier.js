@@ -97,10 +97,9 @@ const selectDelivery = document.querySelector('select');
 const totalDelivery = document.getElementById('totalDelivery');
 const totalWithDelivery = document.querySelector(".totalProducts");
 
-selectDelivery.addEventListener('change', function() {  
+selectDelivery.addEventListener('change', sumTotal);
+function sumTotal() { 
     let valueOfChoice = selectDelivery.options[selectDelivery.selectedIndex].value;    
-    let deliveryIndex = selectDelivery.selectedIndex;
-    console.log(deliveryIndex);
     console.log('Livraison: '+ valueOfChoice);
         if(valueOfChoice === "5"){
             delivery.innerHTML = "5,00";
@@ -113,7 +112,7 @@ selectDelivery.addEventListener('change', function() {
             console.log(mondialRelayDelivery);
             totalWithDelivery.innerHTML = mondialRelayDelivery;
         }
-});
+};
 
 // Check si le panier est vide***********************************************************
 // renvoi false si le panier (localStorage) est vide, true s'il comporte des articles
@@ -218,16 +217,22 @@ submit.addEventListener('click', function(e){
             headers : {
                 'Content-Type' : 'application/json'   
             },
-            body : JSON.stringify(contact, products)
+            body : JSON.stringify({contact, products})
         })
         .then(res => res.json())
-        .then(res => localStorage.setItem('orderId', res.orderId))
-            console.log(res.orderId)
+        .then((data) => {
+            console.log(data.orderId);
+            //envoi dans le localStorage l'identifiant de la commande reçu en réponse
+            //..et la somme des articles
+            localStorage.setItem('orderId', JSON.stringify(data.orderId)); 
+            localStorage.setItem('sum', JSON.stringify(sum));
+            localStorage.setItem('contact', JSON.stringify(data.contact)); 
+            window.location.replace("confirmation.html");
+        })
         .catch(function(error){
             console.log(error)
         })
     }
-})
- 
+}); 
 
 

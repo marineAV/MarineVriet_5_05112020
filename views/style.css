@@ -1,3 +1,8 @@
+/*****************CSS Index.html***************/
+.fa-camera-retro{
+    margin-right: 10px;
+    font-size: 35px;
+}
 /*****************CSS Produit.html*************/
 .logoProduct{
     font-size: 20px;
@@ -58,5 +63,47 @@ h3{
     .titlesCard, .eachArticle{
         display: flex;
         flex-direction: column;
+    }
+}
+/*****************CSS confirmation.html*************/
+.emailSent{
+    font-weight: bold;
+    text-align: center;
+}
+#helloName{
+    font-size: 22px;
+}
+.idCommand{
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+}
+.idCommandTwice{
+    font-weight: bold;
+}
+.commandContainer{
+    text-align: center;
+}
+#cardProduct{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 10px;
+}
+.flexEndText{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.total{
+    margin-right: 30px;
+}
+.boldSalutation{
+    font-weight: bold;
+}
+@media screen and (max-width: 600px){
+    #cardProduct{
+        margin-left: 0;
+        margin-right: 0;  
     }
 }

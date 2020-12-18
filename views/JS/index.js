@@ -9,7 +9,7 @@
      console.log(data);
      for(let cameras of data){
          console.log(cameras);
-
+        // Création de chaque carte de chaque produit de l'api
          let product =
          `<div class='row'>
              <div class='col'>
