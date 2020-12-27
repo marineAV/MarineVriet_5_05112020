@@ -64,6 +64,9 @@ h3{
         display: flex;
         flex-direction: column;
     }
+    .quantityCart{
+        text-align: left;
+    }
 }
 /*****************CSS confirmation.html*************/
 .emailSent{

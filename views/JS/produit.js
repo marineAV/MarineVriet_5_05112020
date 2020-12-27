@@ -39,16 +39,18 @@ fetch(myNewUrl)
     img.src = data.imageUrl;
 
     // Itération de chaque lentilles de chaque produit
-    const dropdown = document.querySelector('select')
-    data.lenses.forEach(element => {
-        console.log(element)
-        let lense = document.createElement('option');
-        lense.classList.add('dropdown-item');
-        lense.setAttribute('href', '#')
-        dropdown.appendChild(lense);
-        lense.innerHTML = element;
-    });
-
+    const dropdown = document.querySelector('select');
+    function allLenses(){
+      data.lenses.forEach(element => {
+          console.log(element)
+          let lense = document.createElement('option');
+          lense.classList.add('dropdown-item');
+          lense.setAttribute('href', '#')
+          dropdown.appendChild(lense);
+          lense.innerHTML = element;
+      });
+    }
+    allLenses();
 
   // Évènement sur le bouton lentilles ******************************************************
     function chosenLenses(){
